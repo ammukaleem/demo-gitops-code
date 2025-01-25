@@ -1,2 +1,3 @@
-# demo-gitops-code
-demo-gitops-code
+# GITOPS CODE REPO
+
+Repo for application code
