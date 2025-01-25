@@ -32,27 +32,4 @@ jobs:
           docker push $IMAGE_TAG
           echo "Docker image pushed to Docker Hub successfully with tag $IMAGE_TAG"
   
-  update-config:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout config repo
-        uses: actions/checkout@v4
-        with:
-          repository: jaleev/demo-gitops-config.git
-          token: ${{ secrets.GITOPS_TOKEN }}
-          path: demo-gitops-config
-          ref: main
-
-      - name: Update image in deployment manifest
-        run: |
-          IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/frontend:build-${{ github.run_id }}
-          cd demo-gitops-config
-          ls -lrt
-          echo $IMAGE_TAG
-          sed -i "s|image: .*|image: $IMAGE_TAG|g" frontend/front-deploy.yaml
-          git config --global user.email ${{ vars.GIT_EMAIL }}
-          git config --global user.name ${{ vars.GIT_USERNAME }}
-          git add .
-          git commit -m "Update image to $IMAGE_TAG"
-          git push origin main
+  
