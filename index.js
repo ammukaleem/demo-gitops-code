@@ -4,7 +4,6 @@ const port = 3000
 
 app.get('/', (req, res) => {
 res.send('Hi Sowdager  welcome to GitOps Argocd!!!')
-res.send('Congrats HAFSA CICD Success!!!')
 })
 
 app.listen(port, () => {
